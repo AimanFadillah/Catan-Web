@@ -14,9 +14,14 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Beranda</a>
             </li>
+            @auth
             <li class="nav-item">
-              <a class="nav-link" href="#">Tentang</a>
+              <form action="/logout" method="post">
+                @csrf
+                <button type="submit" class="btn btn-light p-1 fw-bold" style="color:#674188" >Logout</button>
+              </form>
             </li>
+            @endauth
 
             {{-- dropdown --}}
             {{-- <li class="nav-item dropdown">

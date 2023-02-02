@@ -14,7 +14,7 @@
 
 
     {{-- main --}}
-    <div class="container" style="margin-top:100px" >
+    <div class="container" style="margin-top:100px;margin-bottom:100px" >
         @yield('main')
     </div>
 
