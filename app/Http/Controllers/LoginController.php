@@ -27,7 +27,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($auth)){
             $request->session()->regenerate();
-            return redirect()->intended("/test");
+            return redirect()->intended("/")->with("berhasil","Akun berhasil terdaftar 😋");
         }
 
         return back();
@@ -40,12 +40,24 @@ class LoginController extends Controller
             "password" => "required",
         ]);
 
+        $user = User::where("email",$auth["email"])->get();
+
         if(Auth::attempt( $auth )){
             $request->session()->regenerate();
-            return redirect()->intended("/test");
+            return redirect()->intended("/")->with("berhasil","Selamat Datang " . $user[0]["name"] );
         }
 
         return back()->with("gagal","login mengalami kegagalan 😢");
+    }
+
+    public function logout (Request $request) {
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect("/");
     }
 
 }

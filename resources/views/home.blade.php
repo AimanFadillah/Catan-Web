@@ -13,19 +13,32 @@
         </div>
         </div>
         @endif
+        @if (session()->has("berhasil"))    
+        <div class="row justify-content-center">
+        <div class="col-md-11 alert alert-success alert-dismissible fade show" role="alert">
+          {{ session("berhasil") }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        </div>
+        @endif
 
+        {{-- konten --}}
         <div class="row justify-content-center mb-1">
-        <div class="col-md-11 rounded shadow py-3" style="background-color: #5837D0">
+        <div class="col-md-11 rounded shadow py-1" style="background-color: #5837D0">
             <h1 class="text-light text-center"><span style="color: #30E3DF" >Fit</span>ur<i class="bi bi-pen"></i>Ca<span style="color: #30E3DF" >tan</span></h1>
-            {{-- <p class="text-light" >Catan merupakan website yang berguna untuk menyimpan catetan catetan untuk memudahkan keperluan sehari-hari dalam hal mengingat </p> --}}
         </div>
         </div>
 
-        {{-- <h1 class="text-center" >Fitur - Fitur</h1> --}}
+      
         <div class="row justify-content-evenly mt-1"  >
             <div class="col-md-3 mt-3 shadow rounded d-flex align-items-center" style="background-color:#F94A29">
                 <img src="img/iconSekilas.png">
+                @guest
                 <button class="ms-3 fs-5 text-light" style="background: none;border:none" data-bs-toggle="modal" data-bs-target="#exampleModal" >Sekilas</button>
+                @endguest
+                @auth
+                <a href="/Sekilas" class="ms-3 fs-5 text-light text-decoration-none ">Sekilas</a>
+                @endauth
             </div>
             {{-- modal --}}
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -44,7 +57,12 @@
 
             <div class="col-md-4 mt-3 shadow rounded d-flex align-items-center " style="background-color: #FCE22A">
                 <img src="img/iconPenting.png">
+                @guest
                 <button class="ms-3 fs-5" style="background: none;border:none" data-bs-toggle="modal" data-bs-target="#exampleModal2" >Penting</button>
+                @endguest
+                @auth
+                <a href="/Penting" class="ms-3 fs-5 text-dark text-decoration-none ">Penting</a>
+                @endauth
             </div>
 
             {{-- modal --}}
@@ -65,7 +83,13 @@
 
             <div class="col-md-3 mt-3 shadow rounded d-flex align-items-center " style="background-color: #379237">
                 <img src="img/iconKalender.png">
+                @guest
                 <button class="ms-3 fs-5 text-light" style="background: none;border:none" data-bs-toggle="modal" data-bs-target="#exampleModal3" >Mingguan</button>
+                @endguest
+                @auth
+                <a href="/Mingguan" class="ms-3 fs-5 text-light text-decoration-none ">Mingguan</a>
+                @endauth
+
             </div>
 
              {{-- modal --}}
@@ -85,6 +109,8 @@
 
         </div>
 
+      @guest
+           
         <div class="row justify-content-center">
         <div class="col-md-11 mt-3 py-1 shadow rounded" style="background-color: #FF0032">
             <h1 class="text-center text-light"><span style="color: #30E3DF;" >Mas</span>uk<i class="bi bi-door-open"></i>Daf<span style="color: #30E3DF" >tar</span></h1>
@@ -156,7 +182,9 @@
                 </form>
             </div>
         </div>
-
+      
+      @endguest
+     
 
     </div>
 

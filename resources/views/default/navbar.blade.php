@@ -1,4 +1,5 @@
-<nav class="navbar shadow mb-5 navbar-dark fixed-top" style="background-color:#674188">
+<nav class="navbar shadow mb-5 navbar-dark fixed-top" 
+    style="background-color:#674188">
     <div class="container-fluid">
       <a class="navbar-brand fw-bold" href="#"><i class="bi bi-pen"></i>Ca<span style="color: #30E3DF" >tan</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -14,9 +15,14 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Beranda</a>
             </li>
+            @auth
             <li class="nav-item">
-              <a class="nav-link" href="#">Tentang</a>
+              <form action="/logout" method="post">
+                @csrf
+                <button type="submit" class="btn btn-light p-1 fw-bold" style="color:#674188" >Logout</button>
+              </form>
             </li>
+            @endauth
 
             {{-- dropdown --}}
             {{-- <li class="nav-item dropdown">
