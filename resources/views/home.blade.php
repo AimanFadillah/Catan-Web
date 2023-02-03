@@ -37,7 +37,7 @@
                 <button class="ms-3 fs-5 text-light" style="background: none;border:none" data-bs-toggle="modal" data-bs-target="#exampleModal" >Sekilas</button>
                 @endguest
                 @auth
-                <a href="/sekilas" class="ms-3 fs-5 text-light text-decoration-none ">Sekilas</a>
+                <a href="/Sekilas" class="ms-3 fs-5 text-light text-decoration-none ">Sekilas</a>
                 @endauth
             </div>
             {{-- modal --}}
@@ -61,7 +61,7 @@
                 <button class="ms-3 fs-5" style="background: none;border:none" data-bs-toggle="modal" data-bs-target="#exampleModal2" >Penting</button>
                 @endguest
                 @auth
-                <a href="/penting" class="ms-3 fs-5 text-dark text-decoration-none ">Penting</a>
+                <a href="/Penting" class="ms-3 fs-5 text-dark text-decoration-none ">Penting</a>
                 @endauth
             </div>
 
@@ -87,7 +87,7 @@
                 <button class="ms-3 fs-5 text-light" style="background: none;border:none" data-bs-toggle="modal" data-bs-target="#exampleModal3" >Mingguan</button>
                 @endguest
                 @auth
-                <a href="/mingguan" class="ms-3 fs-5 text-light text-decoration-none ">Mingguan</a>
+                <a href="/Mingguan" class="ms-3 fs-5 text-light text-decoration-none ">Mingguan</a>
                 @endauth
 
             </div>

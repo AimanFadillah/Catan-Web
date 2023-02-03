@@ -23,7 +23,7 @@ class PentingResource extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +34,12 @@ class PentingResource extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            "judul" => "required",
+            "body" => "required",
+        ]);
+
     }
 
     /**

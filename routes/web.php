@@ -27,6 +27,6 @@ Route::post("/daftar",[LoginController::class,"store"]);
 Route::post("/logout",[LoginController::class,"logout"]);
 
 // Sekilas
-Route::resource('/sekilas',SekilasResource::class);
-Route::resource('/penting',PentingResource::class);
-Route::resource('/mingguan',MingguanResource::class);
+Route::resource('/Sekilas',SekilasResource::class);
+Route::resource('/Penting',PentingResource::class);
+Route::resource('/Mingguan',MingguanResource::class);
