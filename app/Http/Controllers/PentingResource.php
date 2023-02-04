@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Penting;
 
 class PentingResource extends Controller
 {
@@ -13,7 +14,10 @@ class PentingResource extends Controller
      */
     public function index()
     {
-        return view("penting");
+        return view("penting",[
+            "Penting" => Penting::latest()->get(),
+            "CariCatatan" => Penting::latest()->take(5)->get(),
+        ]);
     }
 
     /**
@@ -39,6 +43,12 @@ class PentingResource extends Controller
             "judul" => "required",
             "body" => "required",
         ]);
+
+        $validatedData["user_id"] = auth()->user()->id;
+
+        Penting::create($validatedData);
+
+        return redirect("/Penting")->with("berhasil","Catatan Berhasil Dimasukkan");
 
     }
 

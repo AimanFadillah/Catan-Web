@@ -10,6 +10,7 @@ class Penting extends Model
 {
     use HasFactory;
 
+    // protected $fillable = ["judul","body"."user_id"];
     protected $guarded = ["id"];
 
     public function User(){
