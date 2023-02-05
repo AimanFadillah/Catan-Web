@@ -45,7 +45,7 @@
           {{-- Modal Serching  --}}
           <div class="modal fade" id="modalSearching" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
+              <div class="modal-content" style="border:none" >
                 <div class="modal-header" style="background-color: #645CBB" >
                   <h1 class="modal-title fs-5" id="exampleModalLabel">Cari Catatan</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -56,7 +56,7 @@
                   <input type="search" class="form-control fw-bold mb-2" placeholder="Cari..." name="keyword" autofocus value="{{ old("search") }}">
                   </form>
                   @foreach ($CariCatatan as $Carinya)
-                      <a href="/Penting/{{ $Carinya->id }}" class="col-md-12 text-decoration-none text-dark py-2 px-1 my-3 rounded d-flex justify-content-between align-items-center"
+                      <a href="/Penting/{{ $Carinya->id }}" class="col-md-12 text-decoration-none text-dark py-2 px-1 my-1 shadow d-flex justify-content-between align-items-center"
                         style="background-color: #BFACE2">
                         <h5 class="fw-bold" >{{ $Carinya->judul }}</h5>
                         <h6>{{ $Carinya->created_at->format("t-m-Y") }}</h6>
