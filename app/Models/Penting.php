@@ -10,7 +10,13 @@ class Penting extends Model
 {
     use HasFactory;
 
-    // protected $fillable = ["judul","body"."user_id"];
+    public function scopeCari ($query,$data){
+        return $query->when($data ?? false,function($query,$cari){
+            return $query->where("judul","like","%" . $cari . "%");
+        });
+    }
+
+
     protected $guarded = ["id"];
 
     public function User(){

@@ -27,6 +27,11 @@ Route::post("/daftar",[LoginController::class,"store"]);
 Route::post("/logout",[LoginController::class,"logout"]);
 
 // Sekilas
-Route::resource('/Sekilas',SekilasResource::class);
-Route::resource('/Penting',PentingResource::class);
-Route::resource('/Mingguan',MingguanResource::class);
+Route::resource('/Sekilas',SekilasResource::class)->middleware("auth");
+
+// Penting
+Route::resource('/Penting',PentingResource::class)->middleware("auth");
+Route::get("/ajax1238129312",[PentingResource::class,"ajax"])->middleware("auth");
+
+// Mingguan
+Route::resource('/Mingguan',MingguanResource::class)->middleware("auth");

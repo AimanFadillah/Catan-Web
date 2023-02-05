@@ -15,8 +15,14 @@ class PentingResource extends Controller
     public function index()
     {
         return view("penting",[
-            "Penting" => Penting::latest()->get(),
-            "CariCatatan" => Penting::latest()->take(5)->get(),
+            "Penting" => Penting::where("user_id",auth()->user()->id)->latest()->Cari(request("cari"))->paginate(20),
+            "CariCatatan" => Penting::where("user_id",auth()->user()->id)->latest()->take(7)->get(),
+        ]);
+    }
+
+    public function ajax () {
+        return view("ajax.ajaxPenting",[
+            "CariCatatan" => Penting::where("user_id",auth()->user()->id)->latest()->Cari(request("cari"))->take(7)->get(),
         ]);
     }
 
@@ -58,9 +64,11 @@ class PentingResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Penting $Penting)
     {
-        //
+        return view("showPenting",[
+            "Penting" => $Penting,
+        ]);
     }
 
     /**
