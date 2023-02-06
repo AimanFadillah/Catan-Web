@@ -361,6 +361,11 @@
             table.buttons().container()
                 .appendTo( '#example_wrapper .col-md-6:eq(0)' );
         } );
+
+        let empty = document.querySelector(".dataTables_empty");
+
+        empty.innerHTML = "Megawati ";
+
     </script>
 
   </body>
