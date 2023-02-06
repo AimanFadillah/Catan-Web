@@ -10,4 +10,8 @@ class CatanController extends Controller
         return view("home");
     }
 
+    public function dataTable () {
+        return view("test.dataTable");
+    }
+
 }
