@@ -89,9 +89,17 @@ class PentingResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Penting $Penting)
     {
-        //
+        
+        $validatedData = $request->validate([
+            "judul" => "required",
+            "body" => "required",
+        ]);
+
+        Penting::where("id",$Penting->id)->update($validatedData);
+
+        return back()->with("berhasil","Catatan berhasil diganti");
     }
 
     /**
@@ -100,8 +108,10 @@ class PentingResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Penting $Penting)
     {
-        //
+        Penting::destroy($Penting->id);
+
+        return redirect("/Penting")->with("berhasil","Catatan berhasil dihapus");
     }
 }
