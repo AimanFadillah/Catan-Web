@@ -45,7 +45,7 @@
                 <form action="/Penting/{{ $Penting->id }}" method="post">
                     @csrf
                     @method("delete")
-                    <div class="d-flex align-items-center p-1 px-2 justify-content-between"  >
+                    <div class="d-flex align-items-center p-1 px-2 justify-content-center pt-3"  >
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success ms-1">Yakin</button>
                     </div>
