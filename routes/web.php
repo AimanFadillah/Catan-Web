@@ -20,7 +20,7 @@ use App\Http\Controllers\MingguanResource;
 
 // Beranda
 Route::get("/",[CatanController::class,"index"])->name("login");
-Route::get("/datatable",[CatanController::class,"dataTable"])->name("login");
+Route::get("/datatable",[CatanController::class,"dataTable"]);
 
 // Login
 Route::post("/login",[LoginController::class,"auth"]);

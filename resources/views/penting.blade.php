@@ -31,7 +31,7 @@
                       
                       {{-- body --}}
                       <input id="body" type="hidden" name="body" value="{{ old("body") }}" >
-                      <trix-editor input="body" required placeholder="Text @error("body")ini belum disi @enderror" ></trix-editor>
+                      <trix-editor input="body" required placeholder="Text Body @error("body")ini Belum diisi @enderror" ></trix-editor>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
@@ -47,18 +47,16 @@
           <div class="modal fade" id="modalSearching" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content" style="border:none" >
-                <div class="modal-header" style="background-color: #645CBB" >
+                <div class="modal-header text-light" style="background-color: #645CBB" >
                   <div class="spinner-border  spinner-border-sm me-2" id="loading" role="status">
                     <span class="visually-hidden">Loading...</span>
                   </div>
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Cari Catatan</h1>
+                  <h1 class="modal-title fs-5 " id="exampleModalLabel">Cari Catatan</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form action="" >
-                    <input type="search" id="mencari" class="form-control fw-bold mb-2" 
+                    <input type="text" id="mencari" class="form-control fw-bold mb-2" 
                     placeholder="Cari..." name="cari" autofocus autocomplete="off" value="{{ request("cari") }}">
-                  </form>
                   @if($CariCatatan->count())
                   <div id="nyari" >
                     @foreach ($CariCatatan as $Carinya)
@@ -98,23 +96,27 @@
                             <img src="/img/iconTambah.png" alt="TambahCatatan"></button>
                 </div>
             </div>
-            @if ($Penting->count())
+       
 
-            @foreach ($Penting as $Pentingnya)
-                <a href="/Penting/{{ $Pentingnya->id }}" class="col-md-10 text-decoration-none text-dark py-2 shadow d-flex justify-content-between align-items-center" 
-                style="{{ ($loop->iteration % 2) ?  "background-color: #F7F5EB" :  "background-color: #EAE0DA" }} ">
-                  <h5 class="fw-bold" >{{ $Pentingnya->judul }}</h5>
+              @foreach ($Penting as $Pentingnya)
+                <a href="/Penting/{{ $Pentingnya->id }}"
+                class="col-md-10 text-decoration-none text-dark py-2 shadow d-flex justify-content-between align-items-center border-bottom" 
+                style="background-color: #F7F5EB">
+                  <h5 class="fw-bold" > {{ $Pentingnya->judul }}</h5>
                   <h6>{{ $Pentingnya->created_at->format("t-m-Y") }}</h6>
-              </a>
+                </a>
               @endforeach
-              
-              @else
-              
-              <div class="col-md-10 py-4 shadow" style="background-color: #F7F5EB" >
-                  <h3 class="text-center" >Tidak Ada Catatan </h3>
-              </div>
+              @if($PentingBaris > 0)
+                @for($a = 0;$a < $PentingBaris;$a++)
+                  <div 
+                    class="col-md-10 text-decoration-none text-dark py-2 shadow d-flex justify-content-between align-items-center border-bottom" 
+                    style="background-color: #F7F5EB">
+                    <h5 class="fw-bold" >-</h5>
+                  </div>
+                @endfor
+              @endif
 
-            @endif
+           
             <div class="col-md-10 shadow rounded-bottom py-1" style="background-color:#FCE22A" ></div>
             <div class="col-md-10 mt-3 ">
               {{ $Penting->links("Pagination.default") }}
