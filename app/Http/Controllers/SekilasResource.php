@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sekilas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SekilasResource extends Controller
 {
@@ -14,9 +16,13 @@ class SekilasResource extends Controller
      */
     public function index()
     {
+        $oldData = Sekilas::where('created_at', '<', Carbon::now()->subHour(1))->get();
+        foreach ($oldData as $data) {
+            $data->delete();
+        }
+
         return view("sekilas",[
-            "Sekilas" => Sekilas::where("user_id",auth()->user()->id)->latest()->paginate(20),
-            "SekilasBaris" => 10 - Sekilas::where("user_id",auth()->user()->id)->count(),
+            "Sekilas" => Sekilas::where("user_id",auth()->user()->id)->latest()->get(),
         ]);
     }
 
@@ -38,7 +44,18 @@ class SekilasResource extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validatedData = $request->validate([
+            "judul" => "required",
+            "body" => "required",
+        ]);
+        
+        $validatedData["head"] = Str::limit( strip_tags( $request->body),230,"....");
+        $validatedData["user_id"] = auth()->user()->id;
+
+        Sekilas::create($validatedData);
+    
+        return back();
     }
 
     /**
@@ -49,7 +66,9 @@ class SekilasResource extends Controller
      */
     public function show($id)
     {
-        //
+        return view("showsekilas",[
+            "Sekilas" => Sekilas::where("user_id",auth()->user()->id)->where("id",$id)->get(),
+        ]);
     }
 
     /**
