@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sekilas;
 use Illuminate\Http\Request;
 
 class SekilasResource extends Controller
@@ -13,7 +14,10 @@ class SekilasResource extends Controller
      */
     public function index()
     {
-        return view("sekilas");
+        return view("sekilas",[
+            "Sekilas" => Sekilas::where("user_id",auth()->user()->id)->latest()->paginate(20),
+            "SekilasBaris" => 10 - Sekilas::where("user_id",auth()->user()->id)->count(),
+        ]);
     }
 
     /**
