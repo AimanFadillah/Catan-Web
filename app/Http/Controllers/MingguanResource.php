@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mingguan;
 use Illuminate\Http\Request;
 
 class MingguanResource extends Controller
@@ -13,7 +14,35 @@ class MingguanResource extends Controller
      */
     public function index()
     {
-        return view("mingguan");
+        return view("mingguan",[
+            "senin" => Mingguan::where("user_id",auth()->user()->id)->where("hari","senin")->get(),
+            "seninBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","senin")->count(),
+            "seninCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","senin")->count(),
+
+            "selasa" => Mingguan::where("user_id",auth()->user()->id)->where("hari","selasa")->get(),
+            "selasaBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","selasa")->count(),
+            "selasaCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","selasa")->count(),
+
+            "rabu" => Mingguan::where("user_id",auth()->user()->id)->where("hari","rabu")->get(),
+            "rabuBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","rabu")->count(),
+            "rabuCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","rabu")->count(),
+            
+            "kamis" => Mingguan::where("user_id",auth()->user()->id)->where("hari","kamis")->get(),
+            "kamisBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","kamis")->count(),
+            "kamisCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","kamis")->count(),
+
+            "jumat" => Mingguan::where("user_id",auth()->user()->id)->where("hari","jumat")->get(),
+            "jumatBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","jumat")->count(),
+            "jumatCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","jumat")->count(),
+
+            "saptu" => Mingguan::where("user_id",auth()->user()->id)->where("hari","saptu")->get(),
+            "saptuBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","saptu")->count(),
+            "saptuCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","saptu")->count(),
+
+            "minggu" => Mingguan::where("user_id",auth()->user()->id)->where("hari","minggu")->get(),
+            "mingguBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","minggu")->count(),
+            "mingguCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","minggu")->count(),
+        ]);
     }
 
     /**
@@ -34,7 +63,17 @@ class MingguanResource extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            "judul" => "required",
+            "body" => "required",
+            "hari" => "required|max:10"
+        ]);
+
+        $validatedData["user_id"] = auth()->user()->id;
+
+        Mingguan::create($validatedData);
+
+        return back();
     }
 
     /**
@@ -66,9 +105,16 @@ class MingguanResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Mingguan $Mingguan)
     {
-        //
+        $validatedData = $request->validate([
+            "judul" => "required",
+            "body" => "required",
+        ]);
+
+        Mingguan::where("id",$Mingguan->id)->update($validatedData);
+
+        return back();
     }
 
     /**
@@ -77,8 +123,10 @@ class MingguanResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Mingguan $Mingguan)
     {
-        //
+        Mingguan::destroy($Mingguan->id);
+
+        return back();
     }
 }

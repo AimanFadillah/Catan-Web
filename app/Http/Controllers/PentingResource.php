@@ -17,12 +17,14 @@ class PentingResource extends Controller
         return view("penting",[
             "Penting" => Penting::where("user_id",auth()->user()->id)->latest()->Cari(request("cari"))->paginate(20),
             "CariCatatan" => Penting::where("user_id",auth()->user()->id)->latest()->take(7)->get(),
+            "PentingBaris" => 10 - Penting::where("user_id",auth()->user()->id)->count(),
         ]);
     }
 
     public function ajax () {
         return view("ajax.ajaxPenting",[
             "CariCatatan" => Penting::where("user_id",auth()->user()->id)->latest()->Cari(request("cari"))->take(7)->get(),
+            
         ]);
     }
 

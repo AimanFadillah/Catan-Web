@@ -1,7 +1,7 @@
 <nav class="navbar shadow mb-5 navbar-dark fixed-top" 
     style="background-color:#674188">
     <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="#"><i class="bi bi-pen"></i>Ca<span style="color: #30E3DF" >tan</span></a>
+      <a class="navbar-brand fw-bold" href="/"><i class="bi bi-pen"></i>Ca<span style="color: #30E3DF" >tan</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
