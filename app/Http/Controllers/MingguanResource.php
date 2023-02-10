@@ -73,7 +73,7 @@ class MingguanResource extends Controller
 
         Mingguan::create($validatedData);
 
-        return back()->with("berhasil","Catatan mingguan Berhasil dimasukkan");
+        return back();
     }
 
     /**
@@ -105,9 +105,16 @@ class MingguanResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Mingguan $Mingguan)
     {
-        //
+        $validatedData = $request->validate([
+            "judul" => "required",
+            "body" => "required",
+        ]);
+
+        Mingguan::where("id",$Mingguan->id)->update($validatedData);
+
+        return back();
     }
 
     /**
