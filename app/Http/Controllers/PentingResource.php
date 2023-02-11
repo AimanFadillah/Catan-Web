@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Penting;
+use illuminate\Support\Str;
 
 class PentingResource extends Controller
 {
@@ -53,6 +54,7 @@ class PentingResource extends Controller
         ]);
 
         $validatedData["user_id"] = auth()->user()->id;
+        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),30,"...");
 
         Penting::create($validatedData);
 
@@ -99,6 +101,7 @@ class PentingResource extends Controller
             "body" => "required",
         ]);
 
+        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),30,"...");
         Penting::where("id",$Penting->id)->update($validatedData);
 
         return back()->with("berhasil","Catatan berhasil diganti");

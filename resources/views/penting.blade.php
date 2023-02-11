@@ -102,7 +102,7 @@
                 <a href="/Penting/{{ $Pentingnya->id }}"
                 class="col-md-10 text-decoration-none text-dark py-2 shadow d-flex justify-content-between align-items-center border-bottom" 
                 style="background-color: #F7F5EB">
-                  <h5 class="fw-bold" > {{ $Pentingnya->judul }}</h5>
+                  <h5 class="fw-bold" > {{ $Pentingnya->title }}</h5>
                   <h6>{{ $Pentingnya->created_at->format("t-m-Y") }}</h6>
                 </a>
               @endforeach

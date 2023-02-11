@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="col-md-10 shadow py-3" id="konten" style="background-color: #F7F5EB;color:black;"  >
-                <h1 class="text-center mt-2 mb-3" >{{ $Penting->judul }}</h1>
+                <h1 class="text-center mt-2 mb-3" style="word-wrap: break-word" >{{ $Penting->judul }}</h1>
                 <div style="word-wrap: break-word;" class="text-left" >{!! $Penting->body !!}</div>
                 
                 

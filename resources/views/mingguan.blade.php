@@ -99,7 +99,7 @@
                                         <div></div>
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="text-center  fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px" >{{ $catatannya->judul }}</div>
+                                    <div class="text-center px-5 fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px;word-wrap: break-word;" >{{ $catatannya->judul }}</div>
                                     <div style="word-wrap: break-word; " class=" text-left" >{!! $catatannya->body !!}</div>
                                 </div>
                                </div>
@@ -109,7 +109,7 @@
                         {{-- Button --}}
                        
                         <div class="d-flex justify-content-between align-items-center border-bottom " style="background-color: #F7F5EB">
-                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->judul }}</h6>
+                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->title }}</h6>
                             <div>
                                 {{-- Show --}}
                                 <button
@@ -210,7 +210,7 @@
                                         <div></div>
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="text-center  fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px" >{{ $catatannya->judul }}</div>
+                                    <div class="text-center px-5 fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px;word-wrap: break-word; " >{{ $catatannya->judul }}</div>
                                     <div style="word-wrap: break-word; " class=" text-left" >{!! $catatannya->body !!}</div>
                                 </div>
                                </div>
@@ -219,7 +219,7 @@
 
                        {{-- Button --}}
                         <div class="d-flex justify-content-between align-items-center border-bottom " style="background-color: #F7F5EB">
-                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->judul }}</h6>
+                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->title }}</h6>
                             <div>
                                 {{-- Show --}}
                                 <button
@@ -317,7 +317,7 @@
                                         <div></div>
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="text-center  fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px" >{{ $catatannya->judul }}</div>
+                                    <div class="text-center px-5 fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px;word-wrap: break-word; " >{{ $catatannya->judul }}</div>
                                     <div style="word-wrap: break-word; " class=" text-left" >{!! $catatannya->body !!}</div>
                                 </div>
                                </div>
@@ -326,7 +326,7 @@
 
                        {{-- button --}}
                         <div class="d-flex justify-content-between align-items-center border-bottom " style="background-color: #F7F5EB">
-                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->judul }}</h6>
+                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->title }}</h6>
                             <div>
                                 {{-- Show --}}
                                 <button
@@ -424,7 +424,7 @@
                                         <div></div>
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="text-center  fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px" >{{ $catatannya->judul }}</div>
+                                    <div class="text-center px-5 fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px;word-wrap: break-word; " >{{ $catatannya->judul }}</div>
                                     <div style="word-wrap: break-word; " class=" text-left" >{!! $catatannya->body !!}</div>
                                 </div>
                                </div>
@@ -433,7 +433,7 @@
 
                        
                         <div class="d-flex justify-content-between align-items-center border-bottom " style="background-color: #F7F5EB">
-                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->judul }}</h6>
+                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->title }}</h6>
                             <div>
                                 {{-- Show --}}
                                 <button
@@ -532,7 +532,7 @@
                                         <div></div>
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="text-center  fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px" >{{ $catatannya->judul }}</div>
+                                    <div class="text-center px-5 fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px;word-wrap: break-word; " >{{ $catatannya->judul }}</div>
                                     <div style="word-wrap: break-word; " class=" text-left" >{!! $catatannya->body !!}</div>
                                 </div>
                                </div>
@@ -541,7 +541,7 @@
 
                        
                         <div class="d-flex justify-content-between align-items-center border-bottom " style="background-color: #F7F5EB">
-                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->judul }}</h6>
+                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->title }}</h6>
                             <div>
                                 {{-- Show --}}
                                 <button
@@ -640,7 +640,7 @@
                                         <div></div>
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="text-center  fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px" >{{ $catatannya->judul }}</div>
+                                    <div class="text-center px-5 fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px;word-wrap: break-word;" >{{ $catatannya->judul }}</div>
                                     <div style="word-wrap: break-word; " class=" text-left" >{!! $catatannya->body !!}</div>
                                 </div>
                                </div>
@@ -649,7 +649,7 @@
 
                        
                         <div class="d-flex justify-content-between align-items-center border-bottom " style="background-color: #F7F5EB">
-                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->judul }}</h6>
+                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->title }}</h6>
                             <div>
                                 {{-- Show --}}
                                 <button
@@ -748,7 +748,7 @@
                                         <div></div>
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="text-center  fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px" >{{ $catatannya->judul }}</div>
+                                    <div class="text-center px-5 fs-3 mb-4 fw-bold pt-0" style="margin-top: -30px;word-wrap: break-word;" >{{ $catatannya->judul }}</div>
                                     <div style="word-wrap: break-word; " class=" text-left" >{!! $catatannya->body !!}</div>
                                 </div>
                                </div>
@@ -757,7 +757,7 @@
 
                        
                         <div class="d-flex justify-content-between align-items-center border-bottom " style="background-color: #F7F5EB">
-                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->judul }}</h6>
+                            <h6 class="fs-6 px-1 py-2 mb-0" >{{ $catatannya->title }}</h6>
                             <div>
                                 {{-- Show --}}
                                 <button

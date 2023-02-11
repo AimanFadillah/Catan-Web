@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mingguan;
 use Illuminate\Http\Request;
+use illuminate\Support\Str;
 
 class MingguanResource extends Controller
 {
@@ -70,6 +71,7 @@ class MingguanResource extends Controller
         ]);
 
         $validatedData["user_id"] = auth()->user()->id;
+        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15);
 
         Mingguan::create($validatedData);
 
@@ -112,6 +114,7 @@ class MingguanResource extends Controller
             "body" => "required",
         ]);
 
+        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15);
         Mingguan::where("id",$Mingguan->id)->update($validatedData);
 
         return back();

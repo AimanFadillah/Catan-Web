@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("user_id");
             $table->string("judul");
+            $table->string("title");
             $table->text("body");
             $table->string("hari");
             $table->timestamps();
