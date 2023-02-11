@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mingguan;
+use App\Models\Penting;
+use App\Models\Sekilas;
 use Illuminate\Http\Request;
+use illuminate\Support\Str;
 
 class MingguanResource extends Controller
 {
@@ -42,6 +45,10 @@ class MingguanResource extends Controller
             "minggu" => Mingguan::where("user_id",auth()->user()->id)->where("hari","minggu")->get(),
             "mingguBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","minggu")->count(),
             "mingguCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","minggu")->count(),
+
+            "barisPenting" => Penting::where("user_id",auth()->user()->id)->count(),
+            "barisMingguan" => Mingguan::where("user_id",auth()->user()->id)->count(),
+            "barisSekilas" => Sekilas::where("user_id",auth()->user()->id)->count(),
         ]);
     }
 
@@ -70,6 +77,7 @@ class MingguanResource extends Controller
         ]);
 
         $validatedData["user_id"] = auth()->user()->id;
+        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15);
 
         Mingguan::create($validatedData);
 
@@ -112,6 +120,7 @@ class MingguanResource extends Controller
             "body" => "required",
         ]);
 
+        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15);
         Mingguan::where("id",$Mingguan->id)->update($validatedData);
 
         return back();

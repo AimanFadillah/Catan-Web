@@ -12,14 +12,31 @@
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            @guest
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Beranda</a>
+              <a class="nav-link active" style="margin-left: 3px" aria-current="page" href="/">Beranda</a>
             </li>
+            @endguest
             @auth
+            <li class="nav-item">
+              <a href="/Sekilas" type="button" class="btn fw-bold text-light" style="background-color: #F94A29;">
+                Sekilas <span class="badge ms-1 text-bg-light">{{ $barisSekilas }}</span>
+              </a>
+            </li>
+            <li class="nav-item mt-1">
+              <a href="/Penting" type="button" class="btn fw-bold text-dark" style="background-color: #FCE22A;">
+                Penting <span class="badge ms-1 text-bg-light">{{ $barisPenting }}</span>
+              </a>
+            </li>
+            <li class="nav-item mt-1">
+              <a href="/Mingguan" type="button" class="btn fw-bold text-light" style="background-color: #379237;">
+                Mingguan <span class="badge ms-1 text-bg-light">{{ $barisMingguan }}</span>
+              </a>
+            </li>
             <li class="nav-item">
               <form action="/logout" method="post">
                 @csrf
-                <button type="submit" class="btn btn-light p-1 fw-bold" style="color:#674188" >Logout</button>
+                <button type="submit" class="btn btn-light mt-5 p-1 fw-bold" style="color:#674188" >Logout</button>
               </form>
             </li>
             @endauth

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mingguan;
+use App\Models\Penting;
 use App\Models\Sekilas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,6 +25,9 @@ class SekilasResource extends Controller
 
         return view("sekilas",[
             "Sekilas" => Sekilas::where("user_id",auth()->user()->id)->latest()->get(),
+            "barisPenting" => Penting::where("user_id",auth()->user()->id)->count(),
+            "barisMingguan" => Mingguan::where("user_id",auth()->user()->id)->count(),
+            "barisSekilas" => Sekilas::where("user_id",auth()->user()->id)->count(),
         ]);
     }
 
@@ -51,8 +56,9 @@ class SekilasResource extends Controller
         ]);
         
         $validatedData["head"] = Str::limit( strip_tags( $request->body),250,"....");
+        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),8);
         $validatedData["user_id"] = auth()->user()->id;
-
+       
         Sekilas::create($validatedData);
     
         return back();
