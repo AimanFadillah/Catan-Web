@@ -87,7 +87,7 @@
             {{-- Senin --}}
             <div class="col-md-3 mt-3 rounded ">
                 <div class="shadow rounded">
-                <p class="text-center text-light fs-3 rounded-top" style="background-color:#0F6292;margin-bottom:-16px">Senin<p>
+                    <p class="text-center text-light fs-3 rounded-top" style="background-color:#0F6292;margin-bottom:-16px">Senin<p>
 
                     @foreach($senin as $catatannya)
                         {{-- modal Show --}}

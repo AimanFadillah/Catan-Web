@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Penting;
+use App\Models\Sekilas;
+use App\Models\Mingguan;
 
 class User extends Authenticatable
 {
@@ -46,4 +48,13 @@ class User extends Authenticatable
     public function Penting () {
         return $this->hasMany(Penting::class);
     }
+
+    public function Mingguan () {
+        return $this->hasMany(Mingguan::class);
+    }
+
+    public function Sekilas () {
+        return $this->hasMany(Sekilas::class);
+    }
+
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatanController;
+use App\Http\Controllers\CronJobResorce;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SekilasResource;
 use App\Http\Controllers\PentingResource;
@@ -20,7 +21,10 @@ use App\Http\Controllers\MingguanResource;
 
 // Beranda
 Route::get("/",[CatanController::class,"index"])->name("login");
+
+// Test
 Route::get("/datatable",[CatanController::class,"dataTable"]);
+Route::resource('/cronjob',CronJobResorce::class);
 
 // Login
 Route::post("/login",[LoginController::class,"auth"]);

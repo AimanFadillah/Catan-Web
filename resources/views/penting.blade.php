@@ -35,7 +35,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                      <button type="submit" class="btn btn-success">Create</button>
+                      <button type="submit" class="btn btn-success">Buat</button>
                     </div>
                 </form>
                 

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sekilas;
+use App\Models\CronJob;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-class SekilasResource extends Controller
+class CronJobResorce extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +15,27 @@ class SekilasResource extends Controller
      */
     public function index()
     {
-        $oldData = Sekilas::where('created_at', '<', Carbon::now()->subHour(1))->get();
+        $oldData = CronJob::where('created_at', '<', Carbon::now()->subHour(1))->get();
         foreach ($oldData as $data) {
             $data->delete();
         }
 
-        return view("sekilas",[
-            "Sekilas" => Sekilas::where("user_id",auth()->user()->id)->latest()->get(),
+        $countdowns = [];
+
+        foreach ($oldData as $datum) {
+            // Hitung selisih waktu antara tanggal dan waktu saat ini dengan tanggal dan waktu di mana data akan dihapus
+            $diffInSeconds = Carbon::now()->diffInSeconds($datum->created_at->addHour(1));
+
+            // Tambahkan hasil perhitungan waktu ke dalam array
+            $countdowns[] = [
+                'id' => $datum->id,
+                'countdown' => $diffInSeconds
+            ];
+        }
+
+        return view("test.cronjob",[
+            "data" => CronJob::latest()->get(),
+            "waktu" => $countdowns,
         ]);
     }
 
@@ -44,38 +57,33 @@ class SekilasResource extends Controller
      */
     public function store(Request $request)
     {
-        
         $validatedData = $request->validate([
-            "judul" => "required",
-            "body" => "required",
+            "nama" => "required",
         ]);
-        
-        $validatedData["head"] = Str::limit( strip_tags( $request->body),250,"....");
-        $validatedData["user_id"] = auth()->user()->id;
 
-        Sekilas::create($validatedData);
-    
+        CronJob::create($validatedData);
+
         return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\CronJob  $cronJob
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(CronJob $cronJob)
     {
-       
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\CronJob  $cronJob
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CronJob $cronJob)
     {
         //
     }
@@ -84,10 +92,10 @@ class SekilasResource extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\CronJob  $cronJob
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CronJob $cronJob)
     {
         //
     }
@@ -95,13 +103,11 @@ class SekilasResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\CronJob  $cronJob
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CronJob $cronJob)
     {
-        Sekilas::destroy($id);
-
-        return back();
+        
     }
 }
