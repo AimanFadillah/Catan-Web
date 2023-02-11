@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mingguan;
 use Illuminate\Http\Request;
 use App\Models\Penting;
+use App\Models\Sekilas;
 use illuminate\Support\Str;
 
 class PentingResource extends Controller
@@ -19,6 +21,9 @@ class PentingResource extends Controller
             "Penting" => Penting::where("user_id",auth()->user()->id)->latest()->Cari(request("cari"))->paginate(20),
             "CariCatatan" => Penting::where("user_id",auth()->user()->id)->latest()->take(7)->get(),
             "PentingBaris" => 10 - Penting::where("user_id",auth()->user()->id)->count(),
+            "barisPenting" => Penting::where("user_id",auth()->user()->id)->count(),
+            "barisMingguan" => Mingguan::where("user_id",auth()->user()->id)->count(),
+            "barisSekilas" => Sekilas::where("user_id",auth()->user()->id)->count(),
         ]);
     }
 
@@ -54,7 +59,7 @@ class PentingResource extends Controller
         ]);
 
         $validatedData["user_id"] = auth()->user()->id;
-        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),30,"...");
+        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15,"...");
 
         Penting::create($validatedData);
 
@@ -72,6 +77,9 @@ class PentingResource extends Controller
     {
         return view("showPenting",[
             "Penting" => $Penting,
+            "barisPenting" => Penting::where("user_id",auth()->user()->id)->count(),
+            "barisMingguan" => Mingguan::where("user_id",auth()->user()->id)->count(),
+            "barisSekilas" => Sekilas::where("user_id",auth()->user()->id)->count(),
         ]);
     }
 
@@ -101,7 +109,7 @@ class PentingResource extends Controller
             "body" => "required",
         ]);
 
-        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),30,"...");
+        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15,"...");
         Penting::where("id",$Penting->id)->update($validatedData);
 
         return back()->with("berhasil","Catatan berhasil diganti");

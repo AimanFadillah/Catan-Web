@@ -59,7 +59,7 @@
                   <div class="text-decoration-none col-md-3 m-1 mb-5 rounded shadow p-0 " style="background-color: #F7F5EB;">
                   <div class="text-center px-2 rounded-top text-light fw-bold pt-1 d-flex justify-content-between align-items-center" 
                       style="background-color: #F94A29;word-wrap: break-word;">
-                      <h6 class=" fs-3">{{ $Sekilasnya->judul }}</h6>
+                      <h6 class=" fs-3">{{ $Sekilasnya->title }}</h6>
                       <div class="d-flex align-items-center">
                         <form action="/Penting" method="POST" class="d-inline" >
                             @csrf
