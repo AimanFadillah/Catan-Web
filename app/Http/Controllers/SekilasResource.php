@@ -50,7 +50,7 @@ class SekilasResource extends Controller
             "body" => "required",
         ]);
         
-        $validatedData["head"] = Str::limit( strip_tags( $request->body),230,"....");
+        $validatedData["head"] = Str::limit( strip_tags( $request->body),250,"....");
         $validatedData["user_id"] = auth()->user()->id;
 
         Sekilas::create($validatedData);
@@ -66,9 +66,7 @@ class SekilasResource extends Controller
      */
     public function show($id)
     {
-        return view("showsekilas",[
-            "Sekilas" => Sekilas::where("user_id",auth()->user()->id)->where("id",$id)->get(),
-        ]);
+       
     }
 
     /**
@@ -102,6 +100,8 @@ class SekilasResource extends Controller
      */
     public function destroy($id)
     {
-        //
+        Sekilas::destroy($id);
+
+        return back();
     }
 }

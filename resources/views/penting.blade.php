@@ -23,7 +23,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="/Sekilas" method="post">
+                <form action="/Penting" method="post">
                     @csrf
                     <div class="modal-body">
                       {{-- judul --}}

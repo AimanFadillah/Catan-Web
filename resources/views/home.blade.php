@@ -127,14 +127,9 @@
                   @csrf 
                 {{-- email --}}
                 <div class="form-floating">
-                    <input type="email" class="form-control @error('email') is-invalid @enderror " placeholder="email" name="email" id="email" autofocus required autocomplete="off">
+                    <input type="email" class="form-control" placeholder="email" name="email" id="email" autofocus required autocomplete="off">
                     <label id="email" style="color: gray" >Gmail</label>
                 </div>
-                @error('email')
-                        <div class="invalid-feed">
-                            <p style="color:#FF0032"  class="ms-1 fs-6 fw-bold mt-1" >{{ $message }}</p>
-                        </div>
-                @enderror
                 {{-- password --}}
                 <div class="form-floating mt-2">
                     <input type="password" class="form-control @error('password') is-invalid @enderror " placeholder="password" name="password" id="password" autofocus required autocomplete="off">
