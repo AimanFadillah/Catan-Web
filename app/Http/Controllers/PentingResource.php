@@ -54,7 +54,7 @@ class PentingResource extends Controller
     {
 
         $validatedData = $request->validate([
-            "judul" => "required",
+            "judul" => "required|max:25",
             "body" => "required",
         ]);
 
@@ -105,7 +105,7 @@ class PentingResource extends Controller
     {
         
         $validatedData = $request->validate([
-            "judul" => "required",
+            "judul" => "required|max:25",
             "body" => "required",
         ]);
 
