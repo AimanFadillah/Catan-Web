@@ -23,8 +23,8 @@ use App\Http\Controllers\MingguanResource;
 Route::get("/",[CatanController::class,"index"])->name("login");
 
 // Test
-Route::get("/datatable",[CatanController::class,"dataTable"]);
-Route::resource('/cronjob',CronJobResorce::class);
+// Route::get("/datatable",[CatanController::class,"dataTable"]);
+// Route::resource('/cronjob',CronJobResorce::class);
 
 // Login
 Route::post("/login",[LoginController::class,"auth"]);

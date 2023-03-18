@@ -71,7 +71,7 @@ class MingguanResource extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            "judul" => "required",
+            "judul" => "required|max:25",
             "body" => "required",
             "hari" => "required|max:10"
         ]);
@@ -116,7 +116,7 @@ class MingguanResource extends Controller
     public function update(Request $request,Mingguan $Mingguan)
     {
         $validatedData = $request->validate([
-            "judul" => "required",
+            "judul" => "required|max:25",
             "body" => "required",
         ]);
 

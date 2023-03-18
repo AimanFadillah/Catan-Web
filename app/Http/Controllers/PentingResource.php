@@ -30,7 +30,6 @@ class PentingResource extends Controller
     public function ajax () {
         return view("ajax.ajaxPenting",[
             "CariCatatan" => Penting::where("user_id",auth()->user()->id)->latest()->Cari(request("cari"))->take(7)->get(),
-            
         ]);
     }
 
@@ -54,7 +53,7 @@ class PentingResource extends Controller
     {
 
         $validatedData = $request->validate([
-            "judul" => "required",
+            "judul" => "required|max:25",
             "body" => "required",
         ]);
 
@@ -75,12 +74,15 @@ class PentingResource extends Controller
      */
     public function show(Penting $Penting)
     {
-        return view("showPenting",[
-            "Penting" => $Penting,
-            "barisPenting" => Penting::where("user_id",auth()->user()->id)->count(),
-            "barisMingguan" => Mingguan::where("user_id",auth()->user()->id)->count(),
-            "barisSekilas" => Sekilas::where("user_id",auth()->user()->id)->count(),
-        ]);
+        if($Penting->user_id === auth()->user()->id){    
+            return view("showPenting",[
+                "Penting" => $Penting,
+                "barisPenting" => Penting::where("user_id",auth()->user()->id)->count(),
+                "barisMingguan" => Mingguan::where("user_id",auth()->user()->id)->count(),
+                "barisSekilas" => Sekilas::where("user_id",auth()->user()->id)->count(),
+            ]);
+        }
+        return back();  
     }
 
     /**
@@ -103,16 +105,19 @@ class PentingResource extends Controller
      */
     public function update(Request $request,Penting $Penting)
     {
-        
-        $validatedData = $request->validate([
-            "judul" => "required",
-            "body" => "required",
-        ]);
+        if($Penting->user_id === auth()->user()->id){    
+            $validatedData = $request->validate([
+                "judul" => "required|max:25",
+                "body" => "required",
+            ]);
 
-        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15,"...");
-        Penting::where("id",$Penting->id)->update($validatedData);
+            $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15,"...");
+            Penting::where("id",$Penting->id)->update($validatedData);
 
-        return back()->with("berhasil","Catatan berhasil diganti");
+            return back()->with("berhasil","Catatan berhasil diganti");
+        }
+
+        return back();
     }
 
     /**
@@ -123,8 +128,10 @@ class PentingResource extends Controller
      */
     public function destroy(Penting $Penting)
     {
-        Penting::destroy($Penting->id);
-
-        return redirect("/Penting")->with("berhasil","Catatan berhasil dihapus");
+        if($Penting->user_id === auth()->user()->id){    
+            Penting::destroy($Penting->id);
+            return redirect("/Penting")->with("berhasil","Catatan berhasil dihapus");
+        }
+        return back();
     }
 }

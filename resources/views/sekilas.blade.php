@@ -19,7 +19,9 @@
                     <div class="modal-body">
                       {{-- judul --}}
                       <input type="judul" class="form-control fw-bold mb-2 @error('judul') is-invalid @enderror " placeholder="Judul Catatan" name="judul" id="judul" autofocus required autocomplete="off" required value="{{ old("judul") }}">
-                      
+                      @error("judul")
+                      <h6 class="mx-0 ms-2 text-danger" style="font-size: 13px" >{{ $message }}</h6>
+                      @enderror
                       {{-- body --}}
                       <input id="body" type="hidden" name="body" value="{{ old("body") }}" >
                       <trix-editor input="body" required placeholder="Text Body @error("body")ini Belum diisi @enderror" ></trix-editor>
