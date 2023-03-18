@@ -1,8 +1,24 @@
 @extends('default.bosstrap')
 
 @section('main')
+
+{{-- Notif --}}
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast align-items-center bg-success text-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Catatan Penting Berhasil Dibuat 😍
+      </div>
+      <button type="button" class="btn-close text-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+
+
+
     <div class="container">
-      
+
       {{-- Peringatan --}}
       @if (session()->has("berhasil"))    
       <div class="row justify-content-center">
@@ -14,7 +30,7 @@
       @endif
       
 
-        {{-- modall --}}
+        {{-- modal Penting --}}
         <div class="modal fade"  id="modalCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content" style="border: none">
@@ -23,7 +39,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="/Penting" method="post">
+                <form id="formPenting">
                     @csrf
                     <div class="modal-body">
                       {{-- judul --}}
@@ -33,11 +49,13 @@
                       @enderror
                       {{-- body --}}
                       <input id="body" type="hidden" name="body" value="{{ old("body") }}" >
-                      <trix-editor input="body" required placeholder="Text Body @error("body")ini Belum diisi @enderror" ></trix-editor>
+                      <trix-editor input="body" id="textareaTrix" placeholder="Text Body @error("body")ini Belum diisi @enderror" ></trix-editor>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                      <button type="submit" class="btn btn-success">Buat</button>
+                      <button type="button" id="batalCreate" class="btn btn-danger" data-bs-dismiss="modal" >Batal</button>
+                      <button type="submit" class="btn btn-success" id="buatCreatePenting" type="button" >
+                        Buat
+                      </button>
                     </div>
                 </form>
                 
@@ -82,7 +100,7 @@
             </div>
           </div>
 
-        <div class="row justify-content-center ">
+        <div class="row justify-content-center " id="kontenPenting" >
             <div class="col-md-10 d-flex rounded-top shadow justify-content-between py-1 align-items-center" style="background-color:#FCE22A">
                 <div>
                     <a href="/Sekilas" ><img src="/img/iconSekilasKecil.png" alt="iconSekilas"></a>
@@ -98,64 +116,14 @@
                             <img src="/img/iconTambah.png" alt="TambahCatatan"></button>
                 </div>
             </div>
-       
-
-              @foreach ($Penting as $Pentingnya)
-                <a href="/Penting/{{ $Pentingnya->id }}"
-                class="col-md-10 text-decoration-none text-dark py-2 shadow d-flex justify-content-between align-items-center border-bottom" 
-                style="background-color: #F7F5EB">
-                  <h5 class="fw-bold" > {{ $Pentingnya->title }}</h5>
-                  <h6>{{ $Pentingnya->created_at->format("t-m-Y") }}</h6>
-                </a>
-              @endforeach
-              @if($PentingBaris > 0)
-                @for($a = 0;$a < $PentingBaris;$a++)
-                  <div 
-                    class="col-md-10 text-decoration-none text-dark py-2 shadow d-flex justify-content-between align-items-center border-bottom" 
-                    style="background-color: #F7F5EB">
-                    <h5 class="fw-bold" >-</h5>
-                  </div>
-                @endfor
-              @endif
-
            
-            <div class="col-md-10 shadow rounded-bottom py-1" style="background-color:#FCE22A" ></div>
-            <div class="col-md-10 mt-3 ">
-              {{ $Penting->links("Pagination.default") }}
-            </div>
+              <div class="col-md-10 shadow rounded-bottom py-1" id="penutupCatanPenting" style="background-color:#FCE22A" ></div>
         </div>
 
        
 
     </div>
 
-    <script>
-
-
-        let container = document.getElementById("nyari");
-        let cari = document.getElementById('mencari');
-        let loading = document.getElementById('loading');
-
-        loading.style.display = "none";
-
-        cari.addEventListener("keyup",function () {
-          
-          let xhr = new XMLHttpRequest();
-          loading.style.display = "block";
-
-          xhr.onreadystatechange = function () {
-            if(xhr.readyState == 4 && xhr.status == 200){
-              container.innerHTML = xhr.responseText;
-              loading.style.display = "none";
-            }
-          }
-
-          xhr.open("GET","/ajax1238129312?cari=" + cari.value ,true);
-          xhr.send();
-
-        })
-
-
-    </script>
+    <script src="js/penting.js"></script>
 
 @endsection

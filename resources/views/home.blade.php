@@ -127,13 +127,13 @@
                   @csrf 
                 {{-- email --}}
                 <div class="form-floating">
-                    <input type="email" class="form-control" placeholder="email" name="email" id="email" autofocus required autocomplete="off">
-                    <label id="email" style="color: gray" >Gmail</label>
+                    <input type="email" class="form-control" placeholder="email" name="email" id="email-1" autofocus required autocomplete="off">
+                    <label id="email-1" style="color: gray" >Gmail</label>
                 </div>
                 {{-- password --}}
                 <div class="form-floating mt-2">
-                    <input type="password" class="form-control @error('password') is-invalid @enderror " placeholder="password" name="password" id="password" autofocus required autocomplete="off">
-                    <label id="password" style="color: gray" >Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror " placeholder="password" name="password" id="password-1" autofocus required autocomplete="off">
+                    <label id="password-1" style="color: gray" >Password</label>
                 </div>
                 {{-- submit --}}
                 <button type="submit" style="width: 100%;background-color:#FFC93C" class="mt-3 rounded border-0 py-2 shadow fw-bold" >Masuk</button>
@@ -149,8 +149,8 @@
                 @csrf
                   {{-- email --}}
                   <div class="form-floating">
-                    <input type="email" class="form-control @error('email') is-invalid @enderror " placeholder="email" name="email" id="email" autofocus required autocomplete="off">
-                    <label id="email" style="color: gray" >Gmail</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror " placeholder="email" name="email" id="email-2" autofocus required autocomplete="off">
+                    <label id="email-2" style="color: gray" >Gmail</label>
                 </div>
                 @error('email')
                         <div class="invalid-feed">
@@ -169,8 +169,8 @@
                 @enderror
                 {{-- password --}}
                 <div class="form-floating mt-2">
-                    <input type="password" class="form-control @error('password') is-invalid @enderror " placeholder="password" name="password" id="password" autofocus required autocomplete="off">
-                    <label id="password" style="color: gray" >Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror " placeholder="password" name="password" id="password-2" autofocus required autocomplete="off">
+                    <label id="password-2" style="color: gray" >Password</label>
                 </div>
                 {{-- submit --}}
                 <button type="submit" style="width: 100%;background-color:#FFC93C" class="mt-3 rounded border-0 py-2 shadow fw-bold" >Daftar</button>

@@ -15,11 +15,21 @@ class PentingResource extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->query("d") === "penting"){
+            $data = Penting::where("user_id",auth()->user()->id)->latest()->Cari(request("cari"))->paginate(30);
+
+            foreach($data as $dt){
+                $dt["tanggalFormat"] = $dt->created_at->format("t-m-Y");
+            }
+
+            return response()->json($data);
+        }
+
+
         return view("penting",[
-            "Penting" => Penting::where("user_id",auth()->user()->id)->latest()->Cari(request("cari"))->paginate(20),
-            "CariCatatan" => Penting::where("user_id",auth()->user()->id)->latest()->take(7)->get(),
+            "CariCatatan" => Penting::where("user_id",auth()->user()->id)->latest()->take(10)->get(),
             "PentingBaris" => 10 - Penting::where("user_id",auth()->user()->id)->count(),
             "barisPenting" => Penting::where("user_id",auth()->user()->id)->count(),
             "barisMingguan" => Mingguan::where("user_id",auth()->user()->id)->count(),
@@ -60,10 +70,11 @@ class PentingResource extends Controller
         $validatedData["user_id"] = auth()->user()->id;
         $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15,"...");
 
-        Penting::create($validatedData);
+        $catan = Penting::create($validatedData);
 
-        return redirect("/Penting")->with("berhasil","Catatan Berhasil Dimasukkan");
+        $catan["tanggalFormat"] = $catan->created_at->format("t-m-Y");
 
+        return response()->json($catan);
     }
 
     /**
