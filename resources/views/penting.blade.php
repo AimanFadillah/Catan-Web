@@ -3,7 +3,7 @@
 @section('main')
 
 {{-- Notif --}}
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div class="toast-container position-fixed top-0 end-0 p-3">
   <div id="liveToast" class="toast align-items-center bg-success text-light" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
       <div class="toast-body">
@@ -65,7 +65,7 @@
 
           {{-- Modal Serching  --}}
           <div class="modal fade" id="modalSearching" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-lg ">
               <div class="modal-content" style="border:none" >
                 <div class="modal-header text-light" style="background-color: #645CBB" >
                   <div class="spinner-border  spinner-border-sm me-2" id="loading" role="status">
