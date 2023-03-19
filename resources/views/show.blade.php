@@ -17,6 +17,7 @@
     <div class="container mt-10">
 
          {{-- Modall Edit --}}
+        <form action="/catan/{{ $Penting->id }}/update/" method="post">
         <div class="modal fade"  id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content" style="border: none">
@@ -25,29 +26,26 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form id="formShow" action="" method="post">
+                
                     @csrf
-                    @method("put")
                     <div class="modal-body">
                       {{-- judul --}}
-                      <input type="judul" maxlength="25" class="form-control fw-bold mb-2 @error('judul') is-invalid @enderror "
+                      <input type="judul" class="form-control fw-bold mb-2 @error('judul') is-invalid @enderror "
                     placeholder="Judul Catatan" name="judul" id="judul" autofocus required autocomplete="off" required value="{{ old("judul",$Penting->judul) }}">
-                        @error("judul")
-                        <h6 class="mx-0 ms-2 text-danger" style="font-size: 13px" >{{ $message }}</h6>
-                        @enderror
                       {{-- body --}}
                       <input id="body" type="hidden" name="body" value="{{ old("body",$Penting->body) }}" >
-                      <trix-editor id="bodyInputUpdate" input="body" required placeholder="Text @error("body")ini belum disi @enderror" ></trix-editor>
+                      <trix-editor id="bodyInputUpdate" input="body" placeholder="Text Body" ></trix-editor>
                     </div>
                     <div class="modal-footer">
                       <button type="button" id="batalUpdateButton" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
                       <button type="submit" data-catan="{{ $Penting->id }}" id="updateButton" class="btn btn-success">Perbarui</button>
                     </div>
-                </form>
+                
                 
               </div>
             </div>
         </div>
+        </form>
 
         {{-- Modal Hapus --}}
         <div class="modal fade"  id="modalHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -108,6 +106,6 @@
         </div>
     </div>
 
-    <script src="/js/show.js"></script>
+    {{-- <script src="/js/show.js"></script> --}}
 
 @endsection

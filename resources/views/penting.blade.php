@@ -21,11 +21,15 @@
 
       {{-- Peringatan --}}
       @if (session()->has("berhasil"))    
-      <div class="row justify-content-center">
-      <div class="col-md-10 alert alert-success alert-dismissible fade show" role="alert">
-        {{ session("berhasil") }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+      <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="ToastDelete" class="toast align-items-center bg-danger text-light" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">
+              Catatan Berhasil DiHapus 😳
+            </div>
+            <button type="button" class="btn-close text-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
       </div>
       @endif
       

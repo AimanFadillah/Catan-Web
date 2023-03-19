@@ -61,7 +61,7 @@ class PentingResource extends Controller
      */
     public function store(Request $request)
     {
-
+        
         $validatedData = $request->validate([
             "judul" => "required|max:25",
             "body" => "required",
@@ -86,14 +86,15 @@ class PentingResource extends Controller
     public function show(Penting $Penting)
     {
         if($Penting->user_id === auth()->user()->id){    
-            return view("showPenting",[
+            return view("show",[
                 "Penting" => $Penting,
                 "barisPenting" => Penting::where("user_id",auth()->user()->id)->count(),
                 "barisMingguan" => Mingguan::where("user_id",auth()->user()->id)->count(),
                 "barisSekilas" => Sekilas::where("user_id",auth()->user()->id)->count(),
             ]);
         }
-        return back();  
+
+        abort(404); 
     }
 
     /**
@@ -125,10 +126,12 @@ class PentingResource extends Controller
             $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15,"...");
             Penting::where("id",$Penting->id)->update($validatedData);
 
-            return back()->with("berhasil","Catatan berhasil diganti");
+            $data = Penting::find($Penting->id);
+
+            return response()->json($data);
         }
 
-        return back();
+        abort(404);
     }
 
     /**
@@ -143,6 +146,6 @@ class PentingResource extends Controller
             Penting::destroy($Penting->id);
             return redirect("/Penting")->with("berhasil","Catatan berhasil dihapus");
         }
-        return back();
+        abort(404);
     }
 }

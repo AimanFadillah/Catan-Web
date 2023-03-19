@@ -10,6 +10,7 @@ let textareaTrix = document.querySelector("#textareaTrix");
 let batalCreate = document.querySelector("#batalCreate");
 let penutupCatanPenting = document.querySelector("#penutupCatanPenting");
 let buatCreatePenting = document.querySelector("#buatCreatePenting");
+let ToastDelete = document.querySelector("#ToastDelete");
 let toastLiveExample = document.querySelector('#liveToast')
 let isScrolling;
 let page = 1;
@@ -37,6 +38,11 @@ let page = 1;
 
 
 dataCatanPenting(page)
+
+if(ToastDelete){
+    let toastnyaDelete = new bootstrap.Toast(ToastDelete)
+    toastnyaDelete.show()
+}
 
 formPenting.addEventListener("submit",(e) => {
     e.preventDefault();
