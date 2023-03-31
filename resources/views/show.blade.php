@@ -2,7 +2,7 @@
 
 @section('main')
 
-    {{-- Notif --}}
+     {{-- Notif --}}
     <div class="toast-container position-fixed top-0 end-0 p-3">
         <div id="liveToast" class="toast align-items-center bg-primary text-light" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
@@ -13,11 +13,11 @@
         </div>
         </div>
     </div>
+
     
     <div class="container mt-10">
 
          {{-- Modall Edit --}}
-        <form action="/catan/{{ $Penting->id }}/update/" method="post">
         <div class="modal fade"  id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content" style="border: none">
@@ -26,26 +26,28 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                
+                <form id="formShow"  method="post">
                     @csrf
                     <div class="modal-body">
                       {{-- judul --}}
-                      <input type="judul" class="form-control fw-bold mb-2 @error('judul') is-invalid @enderror "
+                      <input type="judul" maxlength="25" class="form-control fw-bold mb-2 @error('judul') is-invalid @enderror "
                     placeholder="Judul Catatan" name="judul" id="judul" autofocus required autocomplete="off" required value="{{ old("judul",$Penting->judul) }}">
+                        @error("judul")
+                        <h6 class="mx-0 ms-2 text-danger" style="font-size: 13px" >{{ $message }}</h6>
+                        @enderror
                       {{-- body --}}
                       <input id="body" type="hidden" name="body" value="{{ old("body",$Penting->body) }}" >
-                      <trix-editor id="bodyInputUpdate" input="body" placeholder="Text Body" ></trix-editor>
+                      <trix-editor  id="bodyInputUpdate" input="body" required placeholder="Text @error("body")ini belum disi @enderror" ></trix-editor>
                     </div>
                     <div class="modal-footer">
                       <button type="button" id="batalUpdateButton" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
                       <button type="submit" data-catan="{{ $Penting->id }}" id="updateButton" class="btn btn-success">Perbarui</button>
                     </div>
-                
+                </form>
                 
               </div>
             </div>
         </div>
-        </form>
 
         {{-- Modal Hapus --}}
         <div class="modal fade"  id="modalHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -58,8 +60,8 @@
                     @csrf
                     @method("delete")
                     <div class="d-flex align-items-center p-1 px-2 justify-content-evenly pt-3" style="margin-top: -20px" >
-                        <button type="button"   class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" data class="btn btn-success ms-1">Yakin</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success ms-1">Yakin</button>
                     </div>
                 </form>
               </div>
@@ -82,8 +84,8 @@
                 </div>
             </div>
             <div class="col-md-10 shadow py-3" id="konten" style="background-color: #F7F5EB;color:black;"  >
-                <h1 id="showJudulPenting" class="text-center mt-2 mb-3" style="word-wrap: break-word" >{{ $Penting->judul }}</h1>
-                <div id="showBodyPenting" style="word-wrap: break-word;" class="text-left" >{!! $Penting->body !!}</div>
+                <h1 class="text-center mt-2 mb-3"  id="showJudulPenting" style="word-wrap: break-word" >{{ $Penting->judul }}</h1>
+                <div style="word-wrap: break-word;"  id="showBodyPenting" class="text-left" >{!! $Penting->body !!}</div>
                 
                 
             </div>
@@ -98,7 +100,7 @@
                     style="border:none;background:none;" class="text-light"
                     ><i class="bi bi-pencil-square"></i></button>
                 </div>
-                <a class="text-light text-decoration-none fs-3" href="/"><i class="bi bi-pen"></i>Ca<span style="color: #30E3DF" >tan</span></a>
+                <a class="text-light text-decoration-none fs-3" href="/Penting"><i class="bi bi-pen"></i>Kem<span style="color: #30E3DF" >bali</span></a>
                 <div class="d-flex align-items-center pt-1">
                     <h6 class="text-light fw-bold d-flex">{{ $Penting->created_at->format("d-m-Y") }}</h6>
                 </div>
@@ -106,6 +108,8 @@
         </div>
     </div>
 
-    {{-- <script src="/js/show.js"></script> --}}
+    
+    <script src="/js/show.js"></script>
+
 
 @endsection

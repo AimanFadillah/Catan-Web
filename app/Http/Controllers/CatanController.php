@@ -7,7 +7,7 @@ use App\Models\Penting;
 use App\Models\Sekilas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use illuminate\Support\Str;
 
 class CatanController extends Controller
 {
@@ -23,8 +23,8 @@ class CatanController extends Controller
         }
         
     }
-
-    public function update(Request $request,Penting $Penting)
+    
+     public function update(Request $request,Penting $Penting)
     {
         if($Penting->user_id === auth()->user()->id){    
             $validatedData = $request->validate([
@@ -37,10 +37,10 @@ class CatanController extends Controller
 
             $data = Penting::find($Penting->id);
 
-            return back();
+            return response()->json($data);
         }
 
-        abort(404);
+        abort(404); 
     }
 
 }

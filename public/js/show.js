@@ -87,12 +87,11 @@ formShow.addEventListener("submit",(e) => {
     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     Perbarui
     `
-    fetch(`/Penting/${updateButton.getAttribute("data-catan")}/`,{
-        method:"post",
+    fetch(`/catan/${updateButton.getAttribute("data-catan")}/update`,{
+        method:"POST",
         body:new FormData(formShow),
         headers:{
             "X-CSRF-TOKEN" : token,
-            "X-HTTP-Method-Overidden" : "PUT"
         }
     })
     .finally(() => {
@@ -108,7 +107,7 @@ formShow.addEventListener("submit",(e) => {
     })
     .then(response => response.json())
     .then(hasil => {
-        showJudulPenting.innerHTML = hasil.judul;
+        showJudulPenting.innerText = hasil.judul;
         showBodyPenting.innerHTML = hasil.body;
     })
 

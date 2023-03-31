@@ -21,7 +21,7 @@ use App\Http\Controllers\MingguanResource;
 
 // Beranda
 Route::get("/",[CatanController::class,"index"])->name("login");
-Route::post("/catan/{Penting:id}/update",[CatanController::class,"update"])->name("login");
+Route::post("/catan/{Penting:id}/update/",[CatanController::class,"update"])->middleware("auth");
 
 // Test
 // Route::get("/datatable",[CatanController::class,"dataTable"]);
