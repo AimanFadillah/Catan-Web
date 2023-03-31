@@ -21,7 +21,7 @@ class PentingResource extends Controller
             $data = Penting::where("user_id",auth()->user()->id)->latest()->Cari(request("cari"))->paginate(30);
 
             foreach($data as $dt){
-                $dt["tanggalFormat"] = $dt->created_at->format("t-m-Y");
+                $dt["tanggalFormat"] = $dt->created_at->format("d-m-Y");
             }
 
             return response()->json($data);
@@ -144,7 +144,7 @@ class PentingResource extends Controller
     {
         if($Penting->user_id === auth()->user()->id){    
             Penting::destroy($Penting->id);
-            return redirect("/Penting")->with("berhasil","Catatan berhasil dihapus");
+            return redirect("/Penting")->with("berhasilDelete","Catatan berhasil dihapus");
         }
         abort(404);
     }

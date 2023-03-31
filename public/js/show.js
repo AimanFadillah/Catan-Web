@@ -70,6 +70,8 @@ normal.addEventListener("click",function () {
 });
 
 let formShow = document.querySelector("#formShow")
+let formDelete = document.querySelector("#formDelete")
+let submitDelete = document.querySelector("#submitDelete")
 let updateButton = document.querySelector("#updateButton")
 let batalUpdateButton = document.querySelector("#batalUpdateButton")
 let showJudulPenting = document.querySelector("#showJudulPenting")
@@ -77,6 +79,16 @@ let showBodyPenting = document.querySelector("#showBodyPenting")
 let bodyInputUpdate = document.querySelector("#bodyInputUpdate")
 let liveToast = document.querySelector("#liveToast")
 let token = document.querySelector(`meta[name="csrf-token"]`).getAttribute("content")
+
+formDelete.addEventListener("submit",() => {
+    submitDelete.disabled = true;
+    submitDelete.innerHTML = 
+    `
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Yakin
+    `
+})
+
 
 formShow.addEventListener("submit",(e) => {
     e.preventDefault();

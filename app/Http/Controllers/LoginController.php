@@ -44,10 +44,10 @@ class LoginController extends Controller
 
         if(Auth::attempt( $auth )){
             $request->session()->regenerate();
-            return redirect()->intended("/")->with("berhasil","Selamat Datang " . $user[0]["name"] );
+            return redirect()->intended("/")->with("berhasil","Selamat Datang " . $user[0]["name"] . "😍" );
         }
 
-        return back()->with("gagal","login mengalami kegagalan 😢");
+        return back()->with("gagal","login mengalami Kesalahan 😢");
     }
 
     public function logout (Request $request) {

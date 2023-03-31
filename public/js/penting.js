@@ -18,22 +18,22 @@ let page = 1;
 
         loading.style.display = "none";
 
-        cari.addEventListener("keyup",function () {
-          
-          let xhr = new XMLHttpRequest();
-          loading.style.display = "block";
+cari.addEventListener("keyup",function () {
+    setTimeout(() => { 
+    let xhr = new XMLHttpRequest();
+    loading.style.display = "block";
 
-          xhr.onreadystatechange = function () {
-            if(xhr.readyState == 4 && xhr.status == 200){
-              container.innerHTML = xhr.responseText;
-              loading.style.display = "none";
-            }
-          }
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && xhr.status == 200){
+            container.innerHTML = xhr.responseText;
+            loading.style.display = "none";
+        }
+    }
 
-          xhr.open("GET","/ajax1238129312?cari=" + cari.value ,true);
-          xhr.send();
-
-        })
+    xhr.open("GET","/ajax1238129312?cari=" + cari.value ,true);
+    xhr.send();
+    },500)      
+})
 
 
 

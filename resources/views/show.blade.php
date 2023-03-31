@@ -56,12 +56,12 @@
                 <div class="modal-body rounded-top">
                   <h1 class="modal-title fs-5" id="modalHapus">Yakin ingin <span style="color: #F55050" >Hapus</span> Catatan Penting ini?</h1>
                 </div>
-                <form action="/Penting/{{ $Penting->id }}" method="post">
+                <form action="/Penting/{{ $Penting->id }}" id="formDelete" method="post">
                     @csrf
                     @method("delete")
                     <div class="d-flex align-items-center p-1 px-2 justify-content-evenly pt-3" style="margin-top: -20px" >
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success ms-1">Yakin</button>
+                        <button type="submit" id="submitDelete" class="btn btn-success ms-1">Yakin</button>
                     </div>
                 </form>
               </div>

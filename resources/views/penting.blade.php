@@ -20,7 +20,7 @@
     <div class="container">
 
       {{-- Peringatan --}}
-      @if (session()->has("berhasil"))    
+      @if (session()->has("berhasilDelete"))    
       <div class="toast-container position-fixed top-0 end-0 p-3">
         <div id="ToastDelete" class="toast align-items-center bg-danger text-light" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="d-flex">
@@ -88,7 +88,7 @@
                         class="col-md-12 text-decoration-none text-dark pt-2 px-1 my-1 shadow d-flex justify-content-between align-items-center"
                         style="background-color: #BFACE2;border-radius:4px">
                         <h6 class="fw-bold" >{{ $Carinya->judul }}</h6>
-                        <h6>{{ $Carinya->created_at->format("t-m-Y") }}</h6>
+                        <h6>{{ $Carinya->created_at->format("d-m-Y") }}</h6>
                       </a>
                     @endforeach
                   </div>

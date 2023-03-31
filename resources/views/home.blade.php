@@ -6,20 +6,28 @@
 
         {{-- peringatan --}}
         @if (session()->has("gagal"))    
-        <div class="row justify-content-center">
-        <div class="col-md-11 alert alert-danger alert-dismissible fade show" role="alert">
-          {{ session("gagal") }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        </div>
+          <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="ToastGagal" class="toast align-items-center bg-danger text-light" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex">
+                <div class="toast-body">
+                  {{ session("gagal") }}
+                </div>
+                <button type="button" class="btn-close text-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+            </div>
+          </div>
         @endif
         @if (session()->has("berhasil"))    
-        <div class="row justify-content-center">
-        <div class="col-md-11 alert alert-success alert-dismissible fade show" role="alert">
-          {{ session("berhasil") }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        </div>
+          <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="ToastBerhasil" class="toast align-items-center bg-success text-light" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex">
+                <div class="toast-body">
+                  {{ session("berhasil") }}
+                </div>
+                <button type="button" class="btn-close text-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+            </div>
+          </div>
         @endif
 
         {{-- konten --}}
@@ -182,5 +190,22 @@
      
 
     </div>
+
+    <script>
+
+        let ToastGagal = document.querySelector("#ToastGagal");
+        let ToastBerhasil = document.querySelector("#ToastBerhasil");
+
+        if(ToastGagal){
+            let ToastGagalnya = new bootstrap.Toast(ToastGagal)
+            ToastGagalnya.show()
+        }
+
+        if(ToastBerhasil){
+            let ToastBerhasilnya = new bootstrap.Toast(ToastBerhasil)
+            ToastBerhasilnya.show()
+        }
+
+    </script>
 
 @endsection
