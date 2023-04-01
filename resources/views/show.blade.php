@@ -72,22 +72,20 @@
             <div class="col-md-10 shadow text-light rounded-top shadow" style="background-color: #20262E">
                 <div class="d-flex justify-content-between align-items-center py-2">
                     <div class="">
-                        <span class="px-3 rounded bg-primary me-2" id="primary"></span>
-                        <span class="px-3 rounded bg-success me-2" id="success"></span>
-                        <span class="px-3 rounded bg-danger me-2" id="danger" ></span>
+                        <span class="px-3 rounded bg-primary me-2 pilihColor" id="primary"></span>
+                        <span class="px-3 rounded bg-success me-2 pilihColor" id="success"></span>
+                        <span class="px-3 rounded bg-danger me-2 pilihColor" id="danger" ></span>
                     </div>
                     <div class="">
-                        <span class="px-3 rounded bg-warning me-2" id="warning" ></span>
-                        <span class="px-3 rounded bg-info me-2" id="info" ></span>
-                        <span class="px-3 rounded " id="normal" style="background-color: #F7F5EB"></span>
+                        <span class="px-3 rounded bg-warning me-2 pilihColor" id="warning" ></span>
+                        <span class="px-3 rounded bg-info me-2 pilihColor" id="info" ></span>
+                        <span class="px-3 rounded pilihColor" id="normal" style="background-color: #F7F5EB"></span>
                     </div>
                 </div>
             </div>
-            <div class="col-md-10 shadow py-3" id="konten" style="background-color: #F7F5EB;color:black;"  >
+            <div class="col-md-10 shadow py-3" id="konten" style="background-color: #F7F5EB;"  >
                 <h1 class="text-center mt-2 mb-3"  id="showJudulPenting" style="word-wrap: break-word" >{{ $Penting->judul }}</h1>
-                <div style="word-wrap: break-word;"  id="showBodyPenting" class="text-left" >{!! $Penting->body !!}</div>
-                
-                
+                <div style="word-wrap: break-word;font-size:20px;" id="showBodyPenting" class="text-left" >{!! $Penting->body !!}</div>
             </div>
             <div class="col-md-10 rounded-bottom d-flex justify-content-between" style="background-color: #20262E" >
                 <div class="d-flex align-items-center">
@@ -99,15 +97,40 @@
                     data-bs-toggle="modal" data-bs-target="#modalEdit"
                     style="border:none;background:none;" class="text-light"
                     ><i class="bi bi-pencil-square"></i></button>
+                    <button 
+                    id="salinButton"
+                    style="border:none;background:none;" class="text-light"
+                    ><i class="bi bi-clipboard"></i></button>
                 </div>
                 <a class="text-light text-decoration-none fs-3" href="/Penting"><i class="bi bi-pen"></i>Kem<span style="color: #30E3DF" >bali</span></a>
                 <div class="d-flex align-items-center pt-1">
-                    <h6 class="text-light fw-bold d-flex">{{ $Penting->created_at->format("d-m-Y") }}</h6>
+                    <label 
+                    for="textColorButton"
+                    style="border:none;background:none;" class="text-light mx-2"
+                    ><i class="bi bi-palette fs-6"></i><input type="color" id="textColorButton" style="position:absolute;z-index:-1" ></label>
+                    <label 
+                    for="colorButton"
+                    style="border:none;background:none;" class="text-light mx-2"
+                    ><i class="bi bi-paint-bucket fs-5"></i><input type="color" id="colorButton" style="position:absolute;z-index:-1" ></label>
+                    <div class="dropdown mx-1">
+                        <a class="bg-dark text-light text-decoration-none" data-bs-toggle="dropdown">
+                            <i class="bi bi-fonts fs-4"></i>
+                        </a>
+                        <ul class="dropdown-menu" style="width: 10%" >
+                          <li><a class="dropdown-item fontSize" data-size="10px" >1x</a></li>
+                          <li><a class="dropdown-item fontSize" data-size="20px">2x</a></li>
+                          <li><a class="dropdown-item fontSize" data-size="30px">3x</a></li>
+                          <li><a class="dropdown-item fontSize" data-size="40px">4x</a></li>
+                          <li><a class="dropdown-item fontSize" data-size="50px">5x</a></li>
+                          <li><a class="dropdown-item fontSize" data-size="60px">6x</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    
     
     <script src="/js/show.js"></script>
 
