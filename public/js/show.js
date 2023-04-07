@@ -87,14 +87,21 @@ normal.addEventListener("click",function () {
 
 // Local Storage
 let showBodyPenting = document.querySelector("#showBodyPenting")
+let colorButton = document.querySelector("#colorButton")
+let textColorButton = document.querySelector("#textColorButton")
 if(typeof(Storage) !== "undefined"){
 
     if(localStorage.getItem("backgroundColorPenting")){
         konten.style.backgroundColor = localStorage.getItem("backgroundColorPenting");
+        colorButton.value = localStorage.getItem("backgroundColorPenting")
     }
 
     if(localStorage.getItem("fontSizePenting")){
         showBodyPenting.style.fontSize = localStorage.getItem("fontSizePenting");
+    }
+
+    if(localStorage.getItem("fontFamilyPenting")){
+        konten.style.fontFamily = localStorage.getItem("fontFamilyPenting");
     }
 
     if(localStorage.getItem("temaPenting")){
@@ -168,6 +175,7 @@ if(typeof(Storage) !== "undefined"){
 
     if(localStorage.getItem("colorPenting")){
         konten.style.color = localStorage.getItem("colorPenting");
+        textColorButton.value = localStorage.getItem("colorPenting");
     }
 
 }
@@ -177,9 +185,8 @@ if(typeof(Storage) !== "undefined"){
 let formShow = document.querySelector("#formShow")
 let salinButton = document.querySelector("#salinButton")
 let formDelete = document.querySelector("#formDelete")
-let colorButton = document.querySelector("#colorButton")
-let textColorButton = document.querySelector("#textColorButton")
 let submitDelete = document.querySelector("#submitDelete")
+let pdfButton = document.querySelector("#pdfButton")
 let updateButton = document.querySelector("#updateButton")
 let batalUpdateButton = document.querySelector("#batalUpdateButton")
 let showJudulPenting = document.querySelector("#showJudulPenting")
@@ -207,19 +214,48 @@ colorButton.addEventListener("input",() => {
 })
 
 salinButton.addEventListener("click",() => {
-    navigator.clipboard.writeText(showBodyPenting.innerText)
-    .then(() => {
-        salinButton.innerHTML = 
-        `
-        <i class="bi bi-clipboard-check"></i>
-        `
-        setTimeout(() => {
-        salinButton.innerHTML = 
-        `
-        <i class="bi bi-clipboard"></i>
-        `
-        },2000)
-    })
+    if (konten.requestFullscreen) {
+        konten.requestFullscreen();
+    } else if (konten.mozRequestFullScreen) { /* Firefox */
+        konten.mozRequestFullScreen();
+    } else if (konten.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        konten.webkitRequestFullscreen();
+    } else if (konten.msRequestFullscreen) { /* IE/Edge */
+        konten.msRequestFullscreen();
+    }
+})
+
+console.log(konten.style.backgroundColor)
+
+pdfButton.addEventListener("click",() => {
+    let pdf = new jsPDF('p', 'pt', 'letter');
+    source = konten.innerHTML;
+    specialElementHandlers = {
+        '#bypassme': function (element, renderer) {
+            return true
+        }
+    };
+    margins = {
+        top: 80,
+        bottom: 60,
+        left: 40,
+        width: 522
+    };
+        
+    pdf.fromHTML(
+        source, 
+        margins.left, 
+        margins.top, { 
+            'width': margins.width, 
+            'elementHandlers': specialElementHandlers
+        },
+
+        function (dispose) {
+            pdf.save(`${showJudulPenting.innerText}.pdf`);
+        }, margins
+    );
+
+
 })
    
 // Event Click WEb
@@ -229,6 +265,12 @@ document.addEventListener("click",(e) => {
         size = e.target.getAttribute("data-size");
         showBodyPenting.style.fontSize = size;
         localStorage.setItem("fontSizePenting",size);
+    }
+
+    if(e.target.classList.contains("fontStyle")){
+        style = e.target.getAttribute("data-style");
+        konten.style.fontFamily = style;
+        localStorage.setItem("fontFamilyPenting",style);
     }
 
 })
