@@ -15,36 +15,19 @@ class MingguanResource extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->query("find")){
+            $data =  Mingguan::find($request->query("find"));
+            return response()->json($data);
+        }
+
+        $hari = ["senin","selasa","rabu","kamis","jumat","saptu","minggu"];
+
         return view("mingguan",[
-            "senin" => Mingguan::where("user_id",auth()->user()->id)->where("hari","senin")->get(),
-            "seninBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","senin")->count(),
-            "seninCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","senin")->count(),
+            "dataMingguan" => Mingguan::where("user_id",auth()->user()->id)->get(),
+            "harinya" => $hari,
 
-            "selasa" => Mingguan::where("user_id",auth()->user()->id)->where("hari","selasa")->get(),
-            "selasaBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","selasa")->count(),
-            "selasaCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","selasa")->count(),
-
-            "rabu" => Mingguan::where("user_id",auth()->user()->id)->where("hari","rabu")->get(),
-            "rabuBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","rabu")->count(),
-            "rabuCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","rabu")->count(),
-            
-            "kamis" => Mingguan::where("user_id",auth()->user()->id)->where("hari","kamis")->get(),
-            "kamisBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","kamis")->count(),
-            "kamisCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","kamis")->count(),
-
-            "jumat" => Mingguan::where("user_id",auth()->user()->id)->where("hari","jumat")->get(),
-            "jumatBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","jumat")->count(),
-            "jumatCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","jumat")->count(),
-
-            "saptu" => Mingguan::where("user_id",auth()->user()->id)->where("hari","saptu")->get(),
-            "saptuBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","saptu")->count(),
-            "saptuCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","saptu")->count(),
-
-            "minggu" => Mingguan::where("user_id",auth()->user()->id)->where("hari","minggu")->get(),
-            "mingguBaris" => 5 - Mingguan::where("user_id",auth()->user()->id)->where("hari","minggu")->count(),
-            "mingguCount" => Mingguan::where("user_id",auth()->user()->id)->where("hari","minggu")->count(),
 
             "barisPenting" => Penting::where("user_id",auth()->user()->id)->count(),
             "barisMingguan" => Mingguan::where("user_id",auth()->user()->id)->count(),
@@ -79,9 +62,9 @@ class MingguanResource extends Controller
         $validatedData["user_id"] = auth()->user()->id;
         $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15);
 
-        Mingguan::create($validatedData);
+        $data = Mingguan::create($validatedData);
 
-        return back();
+        return response()->json($data);
     }
 
     /**
@@ -115,15 +98,20 @@ class MingguanResource extends Controller
      */
     public function update(Request $request,Mingguan $Mingguan)
     {
-        $validatedData = $request->validate([
-            "judul" => "required|max:25",
-            "body" => "required",
-        ]);
+        if(auth()->user()->id === $Mingguan->user_id){
+   
+            $validatedData = $request->validate([
+                "judul" => "required|max:25",
+                "body" => "required",
+            ]);
+            
+            $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15);
+            Mingguan::where("id",$Mingguan->id)->update($validatedData);
+            
+            $data = Mingguan::find($Mingguan->id);
 
-        $validatedData["title"] = Str::limit( strip_tags( $request->judul ),15);
-        Mingguan::where("id",$Mingguan->id)->update($validatedData);
-
-        return back();
+            return response()->json($data);
+        }
     }
 
     /**
@@ -134,8 +122,10 @@ class MingguanResource extends Controller
      */
     public function destroy(Mingguan $Mingguan)
     {
-        Mingguan::destroy($Mingguan->id);
-
-        return back();
+        if(auth()->user()->id === $Mingguan->user_id){
+            Mingguan::destroy($Mingguan->id);
+            $Mingguan["count"] = Mingguan::where("user_id",auth()->user()->id)->where("hari",$Mingguan->hari)->count();
+            return response()->json($Mingguan);
+        }
     }
 }
