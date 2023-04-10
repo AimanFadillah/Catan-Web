@@ -119,7 +119,7 @@
     <div class="row justify-content-evenly">
         @for ($i = 0; $i < 7; $i++) 
 
-        <div class="{{($i == 1 || $i == 4) ? "col-md-4" : "col-md-3"}} mt-3 rounded ">
+        <div class="{{($i == 1 || $i == 4 || $i == 6) ? "col-md-4" : "col-md-3"}} mt-3 rounded ">
             <div class="shadow rounded">
                 <p class="text-center text-light fs-3 rounded-top" 
                 @if($i == 0) style="background-color:#0F6292;margin-bottom:-16px"
@@ -176,13 +176,13 @@
                             
                     @endforeach
                 </div>
+                <div id="wadah{{ $harinya[$i] }}Penambah">
                 @if($dataMingguan->where("hari",$harinya[$i])->count() < 5)
-                    <div id="wadah{{ $harinya[$i] }}Penambah">
                         @for($a = 0;$a < 5 - $dataMingguan->where("hari",$harinya[$i])->count();$a++)
                             <h6 style="background-color: #F7F5EB" class="{{ $harinya[$i] }}Penambah fs-6 px-1 py-2 mb-0 border-bottom">-</h6>
                         @endfor
-                    </div>
-                @endif
+                        @endif
+                </div>
                 
                 <div 
                 @if($i == 0) style="background-color:#0F6292;"
